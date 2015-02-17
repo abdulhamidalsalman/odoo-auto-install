@@ -15,7 +15,7 @@ ODOO_SERVER_UPGRADESERVER="false"
 
 #--ODOO 
 ODOO_GIT_VERSION="8.0" #The version from GITHUB to install "8.0" / "7.0" / "master" / "saas-4"...
-ODOO_USER="odoo" This is the user odoo is running under
+ODOO_USER="odoo" #This is the user odoo is running under
 ODOO_INSTALL_DIRECTORY= "/opt/odoo" #Install directory
 ODOO_INSTALL_DIRECTORY_EXT= "/opt/odoo/odoo-server"	#Install directory odoo server
 ODOO_SERVER_ADMIN_PASSWORD= "!superadmin123" #The admin password for odoo after installation
