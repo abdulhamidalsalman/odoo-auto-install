@@ -16,20 +16,20 @@ ODOO_SERVER_UPGRADESERVER="false"
 #--ODOO 
 ODOO_GIT_VERSION="8.0" #The version from GITHUB to install "8.0" / "7.0" / "master" / "saas-4"...
 ODOO_USER="odoo" #This is the user odoo is running under
-ODOO_INSTALL_DIRECTORY= "/opt/odoo" #Install directory
-ODOO_INSTALL_DIRECTORY_EXT= "/opt/odoo/odoo-server"	#Install directory odoo server
-ODOO_SERVER_ADMIN_PASSWORD= "!superadmin123" #The admin password for odoo after installation
-ODOO_CONFIGFILE_NAME= "odoo-server" #The config file name "odoo-server.conf"
+ODOO_INSTALL_DIRECTORY="/opt/odoo/" #Install directory
+ODOO_INSTALL_DIRECTORY_EXT="/opt/odoo/odoo-server"	#Install directory odoo server
+ODOO_SERVER_ADMIN_PASSWORD="!superadmin123" #The admin password for odoo after installation
+ODOO_CONFIGFILE_NAME="odoo-server" #The config file name "odoo-server.conf"
 
 #--PostgresSQL
-ODOO_SERVER_POSTGRES_INSTALL= "true" #Install Postgress database server
-ODOO_SERVER_POSTGRES_PASSWORD= "$ODOO_SERVER_ADMIN_PASSWORD" #Database server password
+ODOO_SERVER_POSTGRES_INSTALL="true" #Install Postgress database server
+ODOO_SERVER_POSTGRES_PASSWORD="$ODOO_SERVER_ADMIN_PASSWORD" #Database server password
 
 #--NGINX
-ODOO_SERVER_NGINX_INSTALL= "true" #Install
-ODOO_SERVER_NGINX_URL= "odoo.mycompany.com" 
-ODOO_SERVER_NGINX_PORT= "443"
-ODOO_SERVER_NGINX_CONFIG_FILE= "$ODOO_SERVER_NGINX_URL"
+ODOO_SERVER_NGINX_INSTALL="true" #Install
+ODOO_SERVER_NGINX_URL="odoo.mycompany.com" 
+ODOO_SERVER_NGINX_PORT="443"
+ODOO_SERVER_NGINX_CONFIG_FILE="$ODOO_SERVER_NGINX_URL"
 
 #--------------------------------------------------
 # Update Server
