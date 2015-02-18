@@ -46,7 +46,7 @@ fi
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
-if [ $ODOO_SERVER_UPGRADESERVER == "true" ]
+if [ $ODOO_SERVER_POSTGRES_INSTALL == "true" ]
 then
 	echo -e "\n---- Install PostgreSQL server ----"
 	sudo apt-get install postgresql -y
