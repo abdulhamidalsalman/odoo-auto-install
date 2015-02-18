@@ -3,11 +3,14 @@
 # Script for Installation: ODOO Saas4/Trunk server on Ubuntu 14.04 LTS
 # Author: Andras Santoro
 #-------------------------------------------------------------------------------
-# This script will install ODOO Server on clean Ubuntu 14.04 Server
+# This script will install ODOO Server on clean Ubuntu 14.xx Server
 # - added Nginx Proxy Server
 #-------------------------------------------------------------------------------
 # EXAMPLE:
-# sudo ./install_odoo.sh
+# - sudo ./install_odoo.sh
+#-------------------------------------------------------------------------------
+# TESTED ON:
+# - Ubuntu 14.04 LTS
 ################################################################################
 
 # Update and Upgrade the Ubuntu Server
