@@ -27,9 +27,10 @@ ODOO_SERVER_POSTGRES_PASSWORD="$ODOO_SERVER_ADMIN_PASSWORD" #Database server pas
 
 #--NGINX
 ODOO_SERVER_NGINX_INSTALL="true" #Install
-ODOO_SERVER_NGINX_URL="odoo.mycompany.com" 
+ODOO_SERVER_NGINX_URL="odoo.mycompany.com"
+ODOO_SERVER_NGINX_URL_PREFIX="https://"
 ODOO_SERVER_NGINX_PORT="443"
-ODOO_SERVER_NGINX_CONFIG_FILE="$ODOO_SERVER_NGINX_URL"
+ODOO_SERVER_NGINX_CONFIG_FILE="$ODOO_SERVER_NGINX_URL" #file name for config
 
 #--------------------------------------------------
 # Update Server
@@ -37,7 +38,7 @@ ODOO_SERVER_NGINX_CONFIG_FILE="$ODOO_SERVER_NGINX_URL"
 if [ $ODOO_SERVER_UPGRADESERVER == "true" ]
 then
 	echo -e "\n---- Update Server ----"
-	sudo apt-get update
+	sudo apt-get update -y
 	sudo apt-get upgrade -y
 else
 	echo -e "\n---- Server update skipped ----"
@@ -56,6 +57,8 @@ then
 
 	echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
 	sudo su - postgres -c "createuser -s $ODOO_USER" 2> /dev/null || true
+
+	#TODO: set postgres password
 else
 	echo -e "\n---- PostgreSQL skipped ----"
 fi
@@ -67,7 +70,7 @@ sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf -y
-sudo apt-get install python-decorator python-passlib python-geoip python-requests
+sudo apt-get install python-decorator python-passlib python-geoip python-requests -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
@@ -204,10 +207,12 @@ sudo update-rc.d $ODOO_CONFIGFILE_NAME defaults
 if [ $ODOO_SERVER_NGINX_INSTALL == "true" ]
 then
 	echo -e "\n---- Installing NGINX ----"
-	sudo apt-get install nginx
+	sudo apt-get install nginx -y
 
-	ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE = "/etc/nginx/sites-available/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE"
-	ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED = "/etc/nginx/sites-enabled/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE"
+	ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE = "/etc/nginx/sites-available/$ODOO_SERVER_NGINX_CONFIG_FILE" #the config file
+	ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED = "/etc/nginx/sites-enabled/$ODOO_SERVER_NGINX_CONFIG_FILE" #the link path
+
+	echo -e "\n- NGINX config file location = $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE"
 
 	#Todo:maybe warn user that the default config will be changed
 	echo -e "\n---- Create NGINX config file"
@@ -261,6 +266,14 @@ else
 	echo -e "\n---- NGINX skipped ----"
 fi
 
-echo "Done! The ODOO server can be started with /etc/init.d/$ODOO_CONFIGFILE_NAME"
-
+echo "******************************************************************"
+echo "	Installation of ODOO $ODOO_GIT_VERSION complete"
+echo ""
+echo "	Start/Stop server with /etc/init.d/$ODOO_CONFIGFILE_NAME"
+echo ""
+echo "	The server is available internaly:"
+echo "	http://localhost:8069 "
+echo "	The server is available externaly:"
+echo "	$ODOO_SERVER_NGINX_URL_PREFIX$ODOO_SERVER_NGINX_URL:$ODOO_SERVER_NGINX_PORT"
+echo "******************************************************************"
 
