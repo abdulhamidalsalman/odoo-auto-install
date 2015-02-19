@@ -234,7 +234,7 @@ sudo cp /etc/nginx/sites-enabled/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABL
 sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 #sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
-echo '################################################################################' >> >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '################################################################################' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo 'NGINX configuration for $ODOO_SERVER_NGINX_URL' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo '################################################################################' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo 'server {' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
