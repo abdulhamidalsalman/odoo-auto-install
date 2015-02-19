@@ -35,6 +35,16 @@ ODOO_SERVER_NGINX_URL_PREFIX="https://"
 ODOO_SERVER_NGINX_PORT="443"
 ODOO_SERVER_NGINX_CONFIG_FILE="$ODOO_SERVER_NGINX_URL" #file name for config
 
+# Check if run as sudo
+if [ "$(id -u)" != "0" ]; then
+	echo "******************************************************************"
+	echo "	Installation of ODOO FAILED"
+	echo "	please run with "
+	echo "	sudo ./install_odoo.sh "
+	echo "******************************************************************"
+	exit 1
+fi
+
 #--------------------------------------------------
 # Update Server
 #--------------------------------------------------
@@ -221,46 +231,46 @@ echo -e "\n- NGINX config file location = $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILAB
 #Todo:maybe warn user that the default config will be changed
 echo -e "\n---- Create NGINX config file"
 sudo cp /etc/nginx/sites-enabled/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+#sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+#sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
-echo '################################################################################' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo 'NGINX configuration for $ODOO_SERVER_NGINX_URL' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '################################################################################' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo 'server {' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	listen 80;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	server_name $ODOO_SERVER_NGINX_URL;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	add_header Strict-Transport-Security max-age=2592000;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	rewrite ^/.*$ https://escape"$host$request_uri"? permanent;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '}' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE     
-echo 'server {' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '  listen 443;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '  server_name $ODOO_SERVER_NGINX_URL;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '  proxy_set_header Host escape"$host";' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '  proxy_buffering off;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	# add ssl specific settings' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	# keepalive_timeout    240;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	access_log  /var/log/nginx/oddo.access.log;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	error_log   /var/log/nginx/oddo.error.log;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE    
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE   
-echo '	ssl                          on;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	ssl_certificate              /etc/nginx/ssl/server.crt;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
-echo '	ssl_certificate_key          /etc/nginx/ssl/server.key;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	ssl_session_timeout          10h;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
-echo '	ssl_protocols                SSLv3 TLSv1;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	ssl_ciphers                  HIGH:!ADH:!MD5;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
-echo '	ssl_prefer_server_ciphers    on;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	keepalive_timeout   240;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '################################################################################' >> 2
+echo 'NGINX configuration for $ODOO_SERVER_NGINX_URL' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '################################################################################' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo 'server {' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	listen 80;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	server_name $ODOO_SERVER_NGINX_URL;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	add_header Strict-Transport-Security max-age=2592000;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	rewrite ^/.*$ https://escape"$host$request_uri"? permanent;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '}' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE     
+echo 'server {' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '  listen 443;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '  server_name $ODOO_SERVER_NGINX_URL;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '  proxy_set_header Host escape"$host";' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '  proxy_buffering off;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	# add ssl specific settings' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	# keepalive_timeout    240;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	access_log  /var/log/nginx/oddo.access.log;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	error_log   /var/log/nginx/oddo.error.log;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE    
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE   
+echo '	ssl                          on;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	ssl_certificate              /etc/nginx/ssl/server.crt;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
+echo '	ssl_certificate_key          /etc/nginx/ssl/server.key;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	ssl_session_timeout          10h;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
+echo '	ssl_protocols                SSLv3 TLSv1;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	ssl_ciphers                  HIGH:!ADH:!MD5;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
+echo '	ssl_prefer_server_ciphers    on;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	keepalive_timeout   240;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE 
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
-echo '	location / {' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	proxy_pass http://$ODOO_SERVER_NGINX_URL:8069/;' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '	 }' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '}' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-echo '' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	location / {' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	proxy_pass http://$ODOO_SERVER_NGINX_URL:8069/;' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '	 }' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '}' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
 #activate site
 ln -s /$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE $ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED
