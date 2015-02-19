@@ -283,6 +283,7 @@ fi
 # Do some additional Odoo fixing
 # Odoo 9.0 needs currently node-less installed
 if [ $ODOO_GIT_VERSION == "9.0" ]	
+then
 	sudo apt-get install node-less
 fi
 
