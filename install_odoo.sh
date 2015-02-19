@@ -230,9 +230,9 @@ echo -e "\n- NGINX config file location = $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILAB
 
 #Todo:maybe warn user that the default config will be changed
 echo -e "\n---- Create NGINX config file"
-sudo cp /etc/nginx/sites-enabled/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+sudo cp /etc/nginx/sites-available/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-#sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
 echo '################################################################################' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo 'NGINX configuration for $ODOO_SERVER_NGINX_URL' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
@@ -275,7 +275,7 @@ echo '' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 #activate site
 ln -s /$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE $ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED
 #restart service
-service nginx reload
+sudo service nginx reload
 else
 	echo -e "\n---- NGINX skipped ----"
 fi
