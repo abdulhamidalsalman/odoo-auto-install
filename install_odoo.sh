@@ -99,7 +99,7 @@ sudo chown $ODOO_USER:$ODOO_USER /var/log/$ODOO_USER
 # Install wkhtmltopdf PDF Engine
 #--------------------------------------------------
 # Todo: Something changed with the sources. 404 not found is returned
-sudo wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+sudo wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
 # Todo: copy files to /usr/local/bin
 
