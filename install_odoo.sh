@@ -88,6 +88,7 @@ sudo chown $ODOO_USER:$ODOO_USER /var/log/$ODOO_USER
 #--------------------------------------------------
 # Install wkhtmltopdf PDF Engine
 #--------------------------------------------------
+# Todo: Something changed with the sources. 404 not found is returned
 sudo wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
 sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
 # Todo: copy files to /usr/local/bin
@@ -212,15 +213,15 @@ then
 echo -e "\n---- Installing NGINX ----"
 sudo apt-get install nginx -y
 
-ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE = "/etc/nginx/sites-available/$ODOO_SERVER_NGINX_CONFIG_FILE" #the config file
-ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED = "/etc/nginx/sites-enabled/$ODOO_SERVER_NGINX_CONFIG_FILE" #the link path
+ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE="/etc/nginx/sites-available/$ODOO_SERVER_NGINX_CONFIG_FILE" #the config file
+ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED="/etc/nginx/sites-enabled/$ODOO_SERVER_NGINX_CONFIG_FILE" #the link path
 
 echo -e "\n- NGINX config file location = $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE"
 
 #Todo:maybe warn user that the default config will be changed
 echo -e "\n---- Create NGINX config file"
 sudo cp /etc/nginx/sites-enabled/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-sudo chown $root:$root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
 echo '################################################################################' >> ~/$ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
