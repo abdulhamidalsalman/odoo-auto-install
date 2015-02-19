@@ -231,10 +231,10 @@ echo -e "\n- NGINX config file location = $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILAB
 #Todo:maybe warn user that the default config will be changed
 echo -e "\n---- Create NGINX config file"
 sudo cp /etc/nginx/sites-enabled/default $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
-#sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
+sudo chown root:root $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 #sudo chmod 640 $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 
-echo '################################################################################' >> 2
+echo '################################################################################' >> >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo 'NGINX configuration for $ODOO_SERVER_NGINX_URL' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo '################################################################################' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
 echo 'server {' >> $ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE
@@ -279,6 +279,13 @@ service nginx reload
 else
 	echo -e "\n---- NGINX skipped ----"
 fi
+
+# Do some additional Odoo fixing
+# Odoo 9.0 needs currently node-less installed
+if [ $ODOO_GIT_VERSION == "9.0" ]	
+	sudo apt-get install node-less
+fi
+
 
 echo "******************************************************************"
 echo "	Installation of ODOO $ODOO_GIT_VERSION complete"
