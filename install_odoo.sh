@@ -63,7 +63,7 @@ fi
 if [ $ODOO_SERVER_POSTGRES_INSTALL == "true" ]
 then
 	echo -e "\n---- Install PostgreSQL server ----"
-	sudo apt-get install postgresql -y
+	sudo apt-get install postgresql -f -y
 		
 	echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
 	sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
@@ -221,7 +221,7 @@ sudo update-rc.d $ODOO_CONFIGFILE_NAME defaults
 if [ $ODOO_SERVER_NGINX_INSTALL == "true" ]
 then
 echo -e "\n---- Installing NGINX ----"
-sudo apt-get install nginx -y
+sudo apt-get install nginx -f -y
 
 ODOO_SERVER_NGINX_CONFIG_FILE_AVAILABLE="/etc/nginx/sites-available/$ODOO_SERVER_NGINX_CONFIG_FILE" #the config file
 ODOO_SERVER_NGINX_CONFIG_FILE_ENABLED="/etc/nginx/sites-enabled/$ODOO_SERVER_NGINX_CONFIG_FILE" #the link path
